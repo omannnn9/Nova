@@ -1,0 +1,372 @@
+.hero {
+  position: relative;
+  display: flex;
+  align-items: center;
+  min-height: max(100svh, 40rem);
+  padding-top: calc(var(--nav-height) + var(--space-7));
+  padding-bottom: var(--space-9);
+  overflow: hidden;
+  isolation: isolate;
+}
+
+/* ---------- Atmosphere layers ---------- */
+
+.hero__atmosphere {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+}
+
+.hero__grid {
+  position: absolute;
+  inset: 0;
+  background-image: linear-gradient(to right, rgb(248 250 252 / 0.045) 1px, transparent 1px),
+    linear-gradient(to bottom, rgb(248 250 252 / 0.045) 1px, transparent 1px);
+  background-size: 88px 88px;
+  background-position: center top;
+  mask-image: radial-gradient(70% 65% at 70% 45%, #000 0%, transparent 75%);
+  -webkit-mask-image: radial-gradient(70% 65% at 70% 45%, #000 0%, transparent 75%);
+}
+
+.hero__particles {
+  position: absolute;
+  inset: 0;
+  pointer-events: auto;
+  mask-image: radial-gradient(85% 80% at 60% 70%, #000 30%, transparent 85%);
+  -webkit-mask-image: radial-gradient(85% 80% at 60% 70%, #000 30%, transparent 85%);
+  animation: hero-fade-in 2.4s var(--ease-out) both;
+}
+
+/* Horizon glow: Nova Purple at 55%, rising from the bottom edge. The one light source. */
+.hero__horizon {
+  position: absolute;
+  left: 50%;
+  bottom: 0;
+  width: max(110rem, 140vw);
+  height: 75%;
+  transform: translateX(-50%);
+  background: var(--light-horizon);
+  animation: hero-horizon 2.8s var(--ease-out) both;
+}
+
+/* The horizon line itself: a 1px Soft Glow edge where the light meets the page. */
+.hero__horizon::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  bottom: 0;
+  width: min(72rem, 90vw);
+  height: 1px;
+  transform: translateX(-50%);
+  background: var(--light-edge);
+  opacity: 0.7;
+}
+
+@keyframes hero-horizon {
+  from {
+    opacity: 0;
+    transform: translateX(-50%) translateY(12%);
+  }
+}
+
+@keyframes hero-fade-in {
+  from {
+    opacity: 0;
+  }
+}
+
+/* ---------- Layout ---------- */
+
+.hero__inner {
+  display: grid;
+  grid-template-columns: minmax(0, 3fr) minmax(0, 2fr);
+  align-items: center;
+  gap: var(--space-7);
+}
+
+.hero__copy {
+  position: relative;
+  z-index: 1;
+}
+
+.hero__kicker {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-3);
+  padding: 0.45rem 0.95rem 0.45rem 0.75rem;
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius-pill);
+  background: rgb(19 19 26 / 0.6);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  font-size: var(--text-sm);
+  font-weight: 500;
+  color: var(--text-secondary);
+}
+
+.hero__pulse {
+  position: relative;
+  width: 0.5rem;
+  height: 0.5rem;
+  border-radius: 50%;
+  background: var(--nova-electric);
+}
+
+.hero__pulse::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background: var(--nova-electric);
+  animation: hero-pulse 2.4s var(--ease-out) infinite;
+}
+
+@keyframes hero-pulse {
+  to {
+    transform: scale(3);
+    opacity: 0;
+  }
+}
+
+.hero__title {
+  margin-top: var(--space-6);
+  font-size: var(--text-hero);
+  line-height: 0.95;
+}
+
+.hero__line {
+  display: block;
+}
+
+/* SplitText renders an inline-block; keep each line on its own row. */
+.hero__line > .split-parent {
+  display: block !important;
+}
+
+.hero__line--lit {
+  color: var(--nova-glow);
+}
+
+.hero__support {
+  margin-top: var(--space-6);
+}
+
+.hero__lede {
+  max-width: 31rem;
+  font-size: var(--text-md);
+  line-height: 1.6;
+  color: var(--text-secondary);
+  text-wrap: pretty;
+}
+
+.hero__actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-4);
+  margin-top: var(--space-6);
+}
+
+/* ---------- Mark ---------- */
+
+.hero-mark {
+  position: relative;
+  justify-self: end;
+  width: min(100%, 26rem);
+  perspective: 1200px;
+}
+
+.hero-mark__body {
+  transform-style: preserve-3d;
+  will-change: transform;
+}
+
+.hero-mark__svg {
+  width: 100%;
+  height: auto;
+  overflow: visible;
+}
+
+.hero-mark.is-lit .hero-mark__glow {
+  animation: hero-glow-breathe 5s ease-in-out infinite;
+}
+
+@keyframes hero-glow-breathe {
+  0%,
+  100% {
+    opacity: 0.78;
+  }
+  50% {
+    opacity: 0.55;
+  }
+}
+
+/* Labels sit under each part of the mark (svg viewBox adds 20u padding on each side). */
+.hero-mark__labels {
+  position: relative;
+  height: 1.5rem;
+  margin-top: calc(var(--space-2) * -1);
+}
+
+.hero-mark__label {
+  position: absolute;
+  top: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-2);
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--text-tertiary);
+  transform: translateX(-50%);
+  white-space: nowrap;
+  animation: hero-fade-in 0.8s var(--ease-out) both;
+}
+
+.hero-mark__label--left {
+  left: calc((20 + 11) / 140 * 100%);
+}
+
+.hero-mark__label--center {
+  left: 50%;
+}
+
+.hero-mark__label--right {
+  left: calc((20 + 89) / 140 * 100%);
+}
+
+.hero-mark__tick {
+  width: 1px;
+  height: 0.75rem;
+  background: var(--border-strong);
+}
+
+/* ---------- Scroll cue ---------- */
+
+.hero__scroll {
+  position: absolute;
+  left: 50%;
+  bottom: var(--space-5);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-2);
+  transform: translateX(-50%);
+  padding: var(--space-2);
+  color: var(--text-tertiary);
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  transition: color var(--dur-fast) var(--ease-out);
+  animation: hero-fade-in 1s 2.2s var(--ease-out) both;
+}
+
+.hero__scroll:hover {
+  color: var(--nova-white);
+}
+
+.hero__scroll-line {
+  position: relative;
+  width: 1px;
+  height: 2.75rem;
+  overflow: hidden;
+  background: var(--border-strong);
+}
+
+.hero__scroll-line::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: -40%;
+  width: 1px;
+  height: 40%;
+  background: var(--nova-glow);
+  animation: hero-scroll 2.2s var(--ease-in-out) infinite;
+}
+
+@keyframes hero-scroll {
+  to {
+    top: 100%;
+  }
+}
+
+/* ---------- Responsive ---------- */
+
+@media (max-width: 1023.98px) {
+  .hero__inner {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 0.6fr);
+    gap: var(--space-6);
+  }
+}
+
+@media (max-width: 767.98px) {
+  .hero {
+    align-items: flex-start;
+    min-height: auto;
+    padding-top: calc(var(--nav-height) + var(--space-5));
+    padding-bottom: var(--space-9);
+  }
+
+  .hero__inner {
+    grid-template-columns: minmax(0, 1fr);
+    gap: var(--space-5);
+  }
+
+  .hero-mark {
+    order: -1;
+    justify-self: start;
+    width: 9.5rem;
+    margin-left: -0.9rem;
+  }
+
+  .hero-mark__labels {
+    display: none;
+  }
+
+  .hero__title {
+    margin-top: var(--space-5);
+    font-size: clamp(2.35rem, 11.6vw, 4.25rem);
+  }
+
+  .hero__kicker {
+    font-size: 0.8125rem;
+  }
+
+  .hero__actions {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .hero__actions > div,
+  .hero__actions .btn {
+    width: 100%;
+  }
+
+  .hero__horizon {
+    height: 55%;
+  }
+
+  .hero__grid {
+    background-size: 56px 56px;
+  }
+
+  .hero__scroll {
+    display: none;
+  }
+}
+
+@media (max-width: 379.98px) {
+  .hero__kicker-place {
+    display: none;
+  }
+}
+
+@media (max-height: 700px) and (min-width: 768px) {
+  .hero__scroll {
+    display: none;
+  }
+}

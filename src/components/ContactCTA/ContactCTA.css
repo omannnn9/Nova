@@ -1,0 +1,107 @@
+.cta {
+  position: relative;
+  display: flex;
+  align-items: center;
+  min-height: min(56rem, 100svh);
+  padding-block: clamp(7rem, 5rem + 9vw, 13rem);
+  overflow: hidden;
+  isolation: isolate;
+  text-align: center;
+}
+
+/* Light from above: the section's single light source. */
+.cta__light {
+  position: absolute;
+  inset: 0 0 20%;
+  z-index: -1;
+  pointer-events: none;
+  mask-image: linear-gradient(180deg, #000 55%, transparent);
+  -webkit-mask-image: linear-gradient(180deg, #000 55%, transparent);
+}
+
+.cta__light::before {
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: -30%;
+  width: min(60rem, 120vw);
+  height: 70%;
+  transform: translateX(-50%);
+  background: radial-gradient(50% 50% at 50% 50%, rgb(124 58 237 / 0.35), transparent 70%);
+}
+
+.cta__inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.cta__eyebrow::before {
+  display: none;
+}
+
+.cta__title {
+  margin-top: var(--space-6);
+  font-size: clamp(3rem, 0.8rem + 9.4vw, 10.5rem);
+  line-height: 0.92;
+}
+
+.cta__title > span {
+  display: block;
+}
+
+.cta__title .split-parent {
+  display: block !important;
+}
+
+.cta__title-lit {
+  color: var(--nova-glow);
+}
+
+.cta__body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: var(--space-6);
+}
+
+.cta__lede {
+  max-width: 32rem;
+  font-size: var(--text-md);
+  line-height: 1.6;
+  color: var(--text-secondary);
+  text-wrap: balance;
+}
+
+.cta__magnet {
+  margin-top: var(--space-7);
+}
+
+.cta__button {
+  --btn-h: 4.25rem;
+  padding: 0 2.5rem;
+  font-size: 1.125rem;
+}
+
+.cta__note {
+  margin-top: var(--space-4);
+  font-size: var(--text-sm);
+  color: var(--text-tertiary);
+}
+
+.cta__dev-note {
+  margin-top: var(--space-4);
+  padding: var(--space-2) var(--space-4);
+  border: 1px dashed rgb(192 132 252 / 0.5);
+  border-radius: var(--radius-sm);
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  color: var(--nova-glow);
+}
+
+@media (max-width: 767.98px) {
+  .cta__magnet,
+  .cta__magnet .cta__button {
+    width: 100%;
+  }
+}

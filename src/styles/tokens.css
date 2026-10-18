@@ -1,0 +1,86 @@
+/*
+ * Nova 2.0 design tokens.
+ * Source of truth: "NOVA — Brand Identity System" (Identity 2.0), Color & Light and Logo System pages.
+ * Do not introduce colours outside this file.
+ */
+:root {
+  /* Core palette */
+  --nova-black: #0b0b0f; /* Deep Black: ground for ~70% of everything */
+  --nova-purple: #7c3aed; /* Nova Purple: primary actions, mark on light grounds */
+  --nova-electric: #a855f7; /* Electric Purple: lit diagonal on dark, focus, live data */
+  --nova-glow: #c084fc; /* Soft Glow: highlights, accent text on dark, top of glows */
+  --nova-white: #f8fafc; /* White: cool white that keeps purple crisp */
+
+  /* Depth tones (derived from black and white only) */
+  --surface-1: #13131a; /* cards, sidebars */
+  --surface-2: #1c1c26; /* inputs, hover, menus */
+  --border: rgb(248 250 252 / 0.08);
+  --border-strong: rgb(248 250 252 / 0.16);
+  --text: var(--nova-white);
+  --text-secondary: rgb(248 250 252 / 0.64); /* 7.5:1 on black */
+  --text-tertiary: rgb(248 250 252 / 0.5);
+  --purple-wash: #ede9fe; /* light-mode selection only */
+
+  /* Light grounds (inverted sections) */
+  --ink: var(--nova-black);
+  --ink-secondary: rgb(11 11 15 / 0.68);
+  --ink-border: rgb(11 11 15 / 0.1);
+
+  /* The only gradient: one hue, vertical, light from above */
+  --gradient-lit: linear-gradient(180deg, var(--nova-glow) 0%, var(--nova-electric) 45%, var(--nova-purple) 100%);
+
+  /* Light system */
+  --light-horizon: radial-gradient(
+    50% 60% at 50% 100%,
+    rgb(124 58 237 / 0.55) 0%,
+    rgb(124 58 237 / 0.18) 45%,
+    transparent 100%
+  );
+  --light-edge: linear-gradient(90deg, transparent, var(--nova-glow) 30%, var(--nova-glow) 70%, transparent);
+  --light-action: 0 0 0 4px rgb(168 85 247 / 0.28), 0 10px 30px -8px rgb(124 58 237 / 0.65);
+
+  /* Typography */
+  --font-display: 'Archivo Variable', 'Archivo', ui-sans-serif, system-ui, sans-serif;
+  --font-body: 'Hanken Grotesk Variable', 'Hanken Grotesk', ui-sans-serif, system-ui, sans-serif;
+  --font-mono: 'JetBrains Mono Variable', 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
+  --display-stretch: 112%; /* "Archivo SemiBold at width 112" */
+  --display-tracking: -0.03em; /* "−3 % tracking" */
+
+  --text-xs: 0.75rem;
+  --text-sm: 0.875rem;
+  --text-base: 1rem;
+  --text-md: clamp(1.0625rem, 0.98rem + 0.3vw, 1.25rem);
+  --text-lg: clamp(1.25rem, 1.1rem + 0.6vw, 1.625rem);
+  --text-xl: clamp(1.75rem, 1.35rem + 1.6vw, 2.75rem);
+  --text-2xl: clamp(2.25rem, 1.5rem + 3.2vw, 4.5rem);
+  --text-3xl: clamp(2.75rem, 1.4rem + 5.8vw, 7.25rem);
+  --text-hero: clamp(2.6rem, 0.4rem + 6.5vw, 6.5rem);
+
+  /* Spacing (4px base) */
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-5: 1.5rem;
+  --space-6: 2rem;
+  --space-7: 3rem;
+  --space-8: 4rem;
+  --space-9: 6rem;
+  --section-y: clamp(6rem, 4rem + 9vw, 12rem);
+  --gutter: clamp(1rem, 0.5rem + 2.5vw, 2.5rem);
+  --container: 82rem;
+
+  --radius-sm: 0.5rem;
+  --radius-md: 0.875rem;
+  --radius-lg: 1.5rem;
+  --radius-pill: 999px;
+
+  /* Motion */
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+  --dur-fast: 180ms;
+  --dur-base: 320ms;
+  --dur-slow: 700ms;
+
+  --nav-height: 4.5rem;
+}

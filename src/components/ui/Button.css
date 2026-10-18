@@ -1,0 +1,114 @@
+.btn {
+  --btn-h: 3.25rem;
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-3);
+  min-height: var(--btn-h);
+  padding: 0 1.5rem;
+  border-radius: var(--radius-pill);
+  font-family: var(--font-body);
+  font-size: 1rem;
+  font-weight: 600;
+  letter-spacing: -0.005em;
+  line-height: 1;
+  white-space: nowrap;
+  isolation: isolate;
+  transition:
+    background-color var(--dur-base) var(--ease-out),
+    border-color var(--dur-base) var(--ease-out),
+    box-shadow var(--dur-base) var(--ease-out),
+    color var(--dur-base) var(--ease-out);
+  -webkit-tap-highlight-color: transparent;
+}
+
+.btn__icon {
+  width: 1.05em;
+  height: 1.05em;
+  flex: none;
+  transition: transform var(--dur-base) var(--ease-out);
+}
+
+.btn:hover .btn__icon,
+.btn:focus-visible .btn__icon {
+  transform: translateX(3px);
+}
+
+/* Primary: the one lit action. White on Nova Purple = 5.5:1. */
+.btn--primary {
+  background: var(--nova-purple);
+  color: var(--nova-white);
+  box-shadow: inset 0 1px 0 rgb(192 132 252 / 0.55);
+}
+
+.btn--primary:hover,
+.btn--primary:focus-visible {
+  box-shadow:
+    inset 0 1px 0 rgb(192 132 252 / 0.7),
+    var(--light-action);
+}
+
+.btn--primary:active {
+  background: color-mix(in srgb, var(--nova-purple) 88%, var(--nova-black));
+}
+
+.btn--ghost {
+  color: var(--nova-white);
+  border: 1px solid var(--border-strong);
+  background: rgb(248 250 252 / 0.02);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+
+.btn--ghost:hover {
+  border-color: rgb(248 250 252 / 0.32);
+  background: rgb(248 250 252 / 0.06);
+}
+
+.btn--lg {
+  --btn-h: 3.75rem;
+  padding: 0 2rem;
+  font-size: 1.0625rem;
+}
+
+.btn--sm {
+  --btn-h: 2.5rem;
+  padding: 0 1.125rem;
+  font-size: 0.9375rem;
+}
+
+.btn[aria-disabled='true'] {
+  cursor: not-allowed;
+  opacity: 0.55;
+  box-shadow: none;
+}
+
+/* Inline text link with an animated underline */
+.text-link {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-weight: 600;
+  color: var(--nova-white);
+  background: linear-gradient(currentColor, currentColor) 0 100% / 0 1px no-repeat;
+  padding-bottom: 2px;
+  transition:
+    background-size var(--dur-base) var(--ease-out),
+    color var(--dur-base) var(--ease-out);
+}
+
+.text-link:hover,
+.text-link:focus-visible {
+  background-size: 100% 1px;
+  color: var(--nova-glow);
+}
+
+.text-link .btn__icon {
+  width: 1em;
+  height: 1em;
+}
+
+.text-link:hover .btn__icon {
+  transform: translateX(3px);
+}

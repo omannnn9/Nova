@@ -1,0 +1,32 @@
+.nova-logo {
+  --logo-size: 1.375rem;
+  display: inline-flex;
+  align-items: flex-end;
+  gap: calc(var(--logo-size) * 0.22);
+  line-height: 1;
+}
+
+.nova-logo__mark {
+  width: var(--logo-size);
+  height: var(--logo-size);
+  flex: none;
+}
+
+/* Archivo SemiBold, width 112, −3% tracking. The x-height + ascender of this cut ≈ 0.74em. */
+.nova-logo__word {
+  font-family: var(--font-display);
+  font-stretch: var(--display-stretch);
+  font-weight: 600;
+  letter-spacing: var(--display-tracking);
+  font-size: calc(var(--logo-size) / 0.74);
+  line-height: 0.74;
+  margin-bottom: calc(var(--logo-size) * -0.01);
+}
+
+.nova-logo--dark {
+  color: var(--nova-white);
+}
+
+.nova-logo--light {
+  color: var(--nova-black);
+}

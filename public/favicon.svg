@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <style>
+    .stem { fill: #0B0B0F; } .lit { fill: #7C3AED; }
+    @media (prefers-color-scheme: dark) { .stem { fill: #F8FAFC; } .lit { fill: #A855F7; } }
+  </style>
+  <rect class="stem" x="0" y="0" width="22" height="100"/>
+  <polygon class="lit" points="28,0 50,0 72,100 50,100"/>
+  <rect class="stem" x="78" y="0" width="22" height="100"/>
+</svg>

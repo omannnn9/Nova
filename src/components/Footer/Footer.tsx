@@ -1,0 +1,70 @@
+import { navLinks, site } from '../../config/site';
+import { hasWhatsApp } from '../../lib/whatsapp';
+import NovaLogo from '../brand/NovaLogo';
+import ContactLink from '../ui/ContactLink';
+import './Footer.css';
+
+const YEAR = new Date().getFullYear();
+
+const Footer = () => {
+  return (
+    <footer className="footer">
+      <div className="footer__inner container">
+        <div className="footer__brand">
+          <NovaLogo />
+          <p className="footer__tagline">{site.tagline}</p>
+          <p className="footer__about">
+            Websites, web applications and automation for businesses, from {site.location}. Nova is the technology
+            company of {site.parent}.
+          </p>
+        </div>
+
+        <nav className="footer__col" aria-label="Footer">
+          <h2 className="footer__heading">Explore</h2>
+          <ul>
+            {navLinks.map(link => (
+              <li key={link.href}>
+                <a href={link.href} className="footer__link">
+                  {link.label}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </nav>
+
+        <div className="footer__col">
+          <h2 className="footer__heading">Get in touch</h2>
+          <ul>
+            <li>
+              {hasWhatsApp ? (
+                <ContactLink intent="conversation" className="footer__link">
+                  WhatsApp
+                </ContactLink>
+              ) : (
+                <a href="#contact" className="footer__link">
+                  Start a conversation
+                </a>
+              )}
+            </li>
+            <li className="footer__muted">Based in {site.location}</li>
+          </ul>
+        </div>
+      </div>
+
+      <div className="footer__base container">
+        <p>
+          © {YEAR} {site.name}. An {site.parent} company.
+        </p>
+        <a href="#top" className="footer__link">
+          Back to top ↑
+        </a>
+      </div>
+
+      <div className="footer__wordmark" aria-hidden="true">
+        nova
+      </div>
+    </footer>
+  );
+};
+
+export default Footer;
