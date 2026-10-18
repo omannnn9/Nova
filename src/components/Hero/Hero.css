@@ -1,15 +1,14 @@
 .hero {
   position: relative;
   display: flex;
-  align-items: center;
-  min-height: max(100svh, 40rem);
+  flex-direction: column;
+  min-height: min(94svh, 62rem);
   padding-top: calc(var(--nav-height) + var(--space-7));
-  padding-bottom: var(--space-9);
   overflow: hidden;
   isolation: isolate;
 }
 
-/* ---------- Atmosphere layers ---------- */
+/* ---------- Atmosphere ---------- */
 
 .hero__atmosphere {
   position: absolute;
@@ -18,56 +17,13 @@
   pointer-events: none;
 }
 
-.hero__grid {
-  position: absolute;
-  inset: 0;
-  background-image: linear-gradient(to right, rgb(248 250 252 / 0.045) 1px, transparent 1px),
-    linear-gradient(to bottom, rgb(248 250 252 / 0.045) 1px, transparent 1px);
-  background-size: 88px 88px;
-  background-position: center top;
-  mask-image: radial-gradient(70% 65% at 70% 45%, #000 0%, transparent 75%);
-  -webkit-mask-image: radial-gradient(70% 65% at 70% 45%, #000 0%, transparent 75%);
-}
-
 .hero__particles {
   position: absolute;
   inset: 0;
   pointer-events: auto;
-  mask-image: radial-gradient(85% 80% at 60% 70%, #000 30%, transparent 85%);
-  -webkit-mask-image: radial-gradient(85% 80% at 60% 70%, #000 30%, transparent 85%);
+  mask-image: radial-gradient(48% 70% at 74% 92%, #000 10%, transparent 80%);
+  -webkit-mask-image: radial-gradient(48% 70% at 74% 92%, #000 10%, transparent 80%);
   animation: hero-fade-in 2.4s var(--ease-out) both;
-}
-
-/* Horizon glow: Nova Purple at 55%, rising from the bottom edge. The one light source. */
-.hero__horizon {
-  position: absolute;
-  left: 50%;
-  bottom: 0;
-  width: max(110rem, 140vw);
-  height: 75%;
-  transform: translateX(-50%);
-  background: var(--light-horizon);
-  animation: hero-horizon 2.8s var(--ease-out) both;
-}
-
-/* The horizon line itself: a 1px Soft Glow edge where the light meets the page. */
-.hero__horizon::after {
-  content: '';
-  position: absolute;
-  left: 50%;
-  bottom: 0;
-  width: min(72rem, 90vw);
-  height: 1px;
-  transform: translateX(-50%);
-  background: var(--light-edge);
-  opacity: 0.7;
-}
-
-@keyframes hero-horizon {
-  from {
-    opacity: 0;
-    transform: translateX(-50%) translateY(12%);
-  }
 }
 
 @keyframes hero-fade-in {
@@ -76,67 +32,36 @@
   }
 }
 
-/* ---------- Layout ---------- */
+/* ---------- Stage: everything rests on the horizon ---------- */
 
-.hero__inner {
+.hero__stage {
+  flex: 1;
   display: grid;
-  grid-template-columns: minmax(0, 3fr) minmax(0, 2fr);
-  align-items: center;
+  grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr);
+  align-items: end;
   gap: var(--space-7);
 }
 
 .hero__copy {
   position: relative;
   z-index: 1;
-}
-
-.hero__kicker {
-  display: inline-flex;
-  align-items: center;
-  gap: var(--space-3);
-  padding: 0.45rem 0.95rem 0.45rem 0.75rem;
-  border: 1px solid var(--border-strong);
-  border-radius: var(--radius-pill);
-  background: rgb(19 19 26 / 0.6);
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
-  font-size: var(--text-sm);
-  font-weight: 500;
-  color: var(--text-secondary);
-}
-
-.hero__pulse {
-  position: relative;
-  width: 0.5rem;
-  height: 0.5rem;
-  border-radius: 50%;
-  background: var(--nova-electric);
-}
-
-.hero__pulse::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  border-radius: 50%;
-  background: var(--nova-electric);
-  animation: hero-pulse 2.4s var(--ease-out) infinite;
-}
-
-@keyframes hero-pulse {
-  to {
-    transform: scale(3);
-    opacity: 0;
-  }
+  padding-bottom: clamp(2.5rem, 1.5rem + 3vw, 4.5rem);
 }
 
 .hero__title {
-  margin-top: var(--space-6);
   font-size: var(--text-hero);
   line-height: 0.95;
 }
 
 .hero__line {
   display: block;
+}
+
+/* Lines are composed, not wrapped: on wider screens a line may extend over the mark's empty upper column. */
+@media (min-width: 768px) {
+  .hero__line > .split-parent {
+    white-space: nowrap !important; /* SplitText sets white-space inline */
+  }
 }
 
 /* SplitText renders an inline-block; keep each line on its own row. */
@@ -153,7 +78,7 @@
 }
 
 .hero__lede {
-  max-width: 31rem;
+  max-width: 30rem;
   font-size: var(--text-md);
   line-height: 1.6;
   color: var(--text-secondary);
@@ -164,209 +89,236 @@
   display: flex;
   flex-wrap: wrap;
   align-items: center;
-  gap: var(--space-4);
+  gap: var(--space-5) var(--space-7);
   margin-top: var(--space-6);
 }
 
-/* ---------- Mark ---------- */
+.hero__secondary {
+  min-height: 44px;
+}
+
+/* ---------- The mark ---------- */
 
 .hero-mark {
   position: relative;
   justify-self: end;
-  width: min(100%, 26rem);
-  perspective: 1200px;
+  width: min(100%, 31rem);
+  perspective: 1400px;
+}
+
+/* The light source: pooled at the mark's base, rising from the horizon (Nova Purple, 55%). */
+.hero-mark::before {
+  content: '';
+  position: absolute;
+  left: 50%;
+  bottom: 0;
+  z-index: -1;
+  width: 280%;
+  height: 120%;
+  transform: translateX(-50%);
+  /* Centred on the horizon and only above it: the line is where light meets the ground. */
+  background: radial-gradient(
+    50% 100% at 50% 100%,
+    rgb(124 58 237 / 0.55),
+    rgb(124 58 237 / 0.16) 48%,
+    transparent 78%
+  );
+  pointer-events: none;
+  animation: hero-fade-in 2.6s var(--ease-out) both;
+}
+
+/* Clips only below the horizon, so the stems can rise out of it while the glow spreads above. */
+.hero-mark__frame {
+  clip-path: inset(-60% -60% 0 -60%);
 }
 
 .hero-mark__body {
-  transform-style: preserve-3d;
+  transform-origin: 50% 100%;
   will-change: transform;
 }
 
 .hero-mark__svg {
+  display: block;
   width: 100%;
   height: auto;
   overflow: visible;
 }
 
 .hero-mark.is-lit .hero-mark__glow {
-  animation: hero-glow-breathe 5s ease-in-out infinite;
+  animation: hero-glow-breathe 6s ease-in-out infinite;
 }
 
 @keyframes hero-glow-breathe {
   0%,
   100% {
-    opacity: 0.78;
+    opacity: 0.75;
   }
   50% {
     opacity: 0.55;
   }
 }
 
-/* Labels sit under each part of the mark (svg viewBox adds 20u padding on each side). */
+/* Annotations below the horizon, centred under each part (viewBox x: -24 → 124). */
 .hero-mark__labels {
-  position: relative;
-  height: 1.5rem;
-  margin-top: calc(var(--space-2) * -1);
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  height: 3.5rem;
 }
 
 .hero-mark__label {
   position: absolute;
-  top: 0;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: var(--space-2);
+  top: 1.15rem;
+  transform: translateX(-50%);
   font-family: var(--font-mono);
   font-size: var(--text-xs);
   letter-spacing: 0.12em;
   text-transform: uppercase;
   color: var(--text-tertiary);
-  transform: translateX(-50%);
   white-space: nowrap;
   animation: hero-fade-in 0.8s var(--ease-out) both;
 }
 
-.hero-mark__label--left {
-  left: calc((20 + 11) / 140 * 100%);
+.hero-mark__label:nth-child(1) {
+  left: calc(35 / 148 * 100%);
 }
 
-.hero-mark__label--center {
+.hero-mark__label:nth-child(2) {
   left: 50%;
+  color: var(--nova-glow);
 }
 
-.hero-mark__label--right {
-  left: calc((20 + 89) / 140 * 100%);
+.hero-mark__label:nth-child(3) {
+  left: calc(113 / 148 * 100%);
 }
 
-.hero-mark__tick {
-  width: 1px;
-  height: 0.75rem;
-  background: var(--border-strong);
-}
+/* ---------- Ground strip ---------- */
 
-/* ---------- Scroll cue ---------- */
-
-.hero__scroll {
-  position: absolute;
-  left: 50%;
-  bottom: var(--space-5);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: var(--space-2);
-  transform: translateX(-50%);
-  padding: var(--space-2);
-  color: var(--text-tertiary);
-  font-family: var(--font-mono);
-  font-size: 0.6875rem;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  transition: color var(--dur-fast) var(--ease-out);
-  animation: hero-fade-in 1s 2.2s var(--ease-out) both;
-}
-
-.hero__scroll:hover {
-  color: var(--nova-white);
-}
-
-.hero__scroll-line {
+.hero__ground {
   position: relative;
-  width: 1px;
-  height: 2.75rem;
-  overflow: hidden;
-  background: var(--border-strong);
+  display: flex;
+  align-items: center;
+  min-height: 3.5rem;
+  padding-block: var(--space-4) var(--space-5);
 }
 
-.hero__scroll-line::after {
-  content: '';
+.hero__horizon {
   position: absolute;
-  left: 0;
-  top: -40%;
-  width: 1px;
-  height: 40%;
-  background: var(--nova-glow);
-  animation: hero-scroll 2.2s var(--ease-in-out) infinite;
+  top: 0;
+  left: 50%;
+  width: 100vw;
+  height: 1px;
+  transform: translateX(-50%);
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgb(248 250 252 / 0.14) 20%,
+    var(--nova-glow) 74%,
+    rgb(248 250 252 / 0.14) 94%,
+    transparent
+  );
+  transform-origin: 74% 50%;
+  animation: hero-horizon 1.4s var(--ease-out) both;
 }
 
-@keyframes hero-scroll {
-  to {
-    top: 100%;
+@keyframes hero-horizon {
+  from {
+    transform: translateX(-50%) scaleX(0);
   }
+}
+
+.hero__index {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2) var(--space-6);
+}
+
+.hero__index a {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-3);
+  min-height: 32px;
+  font-size: var(--text-sm);
+  color: var(--text-secondary);
+  transition: color var(--dur-fast) var(--ease-out);
+}
+
+/* Each service is marked with the brand's 12.4° stroke. */
+.hero__index a::before {
+  content: '';
+  width: 2px;
+  height: 0.8em;
+  background: var(--nova-electric);
+  transform: skewX(12.4deg);
+}
+
+.hero__index a:hover {
+  color: var(--nova-white);
 }
 
 /* ---------- Responsive ---------- */
 
 @media (max-width: 1023.98px) {
-  .hero__inner {
-    grid-template-columns: minmax(0, 1fr) minmax(0, 0.6fr);
-    gap: var(--space-6);
+  .hero__stage {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 0.7fr);
+    gap: var(--space-5);
+  }
+}
+
+@media (max-width: 1023.98px) and (orientation: portrait) {
+  .hero {
+    min-height: auto;
   }
 }
 
 @media (max-width: 767.98px) {
   .hero {
-    align-items: flex-start;
     min-height: auto;
-    padding-top: calc(var(--nav-height) + var(--space-5));
-    padding-bottom: var(--space-9);
+    padding-top: calc(var(--nav-height) + var(--space-6));
   }
 
-  .hero__inner {
+  .hero__stage {
     grid-template-columns: minmax(0, 1fr);
-    gap: var(--space-5);
+    gap: 0;
+  }
+
+  .hero__copy {
+    padding-bottom: var(--space-7);
+  }
+
+  .hero__title {
+    font-size: clamp(2.35rem, 11.6vw, 4.25rem);
+  }
+
+  .hero__actions {
+    gap: var(--space-4) var(--space-6);
   }
 
   .hero-mark {
-    order: -1;
-    justify-self: start;
-    width: 9.5rem;
-    margin-left: -0.9rem;
+    width: min(62vw, 17rem);
+  }
+
+  .hero-mark::before {
+    width: 360%;
+  }
+
+  .hero__particles {
+    mask-image: radial-gradient(70% 45% at 75% 85%, #000 10%, transparent 80%);
+    -webkit-mask-image: radial-gradient(70% 45% at 75% 85%, #000 10%, transparent 80%);
   }
 
   .hero-mark__labels {
     display: none;
   }
 
-  .hero__title {
-    margin-top: var(--space-5);
-    font-size: clamp(2.35rem, 11.6vw, 4.25rem);
-  }
-
-  .hero__kicker {
-    font-size: 0.8125rem;
-  }
-
-  .hero__actions {
-    flex-direction: column;
-    align-items: stretch;
-  }
-
-  .hero__actions > div,
-  .hero__actions .btn {
-    width: 100%;
-  }
-
-  .hero__horizon {
-    height: 55%;
-  }
-
-  .hero__grid {
-    background-size: 56px 56px;
-  }
-
-  .hero__scroll {
-    display: none;
+  .hero__index {
+    gap: var(--space-2) var(--space-5);
   }
 }
 
 @media (max-width: 379.98px) {
-  .hero__kicker-place {
-    display: none;
-  }
-}
-
-@media (max-height: 700px) and (min-width: 768px) {
-  .hero__scroll {
-    display: none;
+  .hero__actions .btn {
+    width: 100%;
   }
 }

@@ -130,7 +130,7 @@ const Navigation = () => {
         </nav>
 
         <div className="nav__actions">
-          <ContactLink intent="general" fallbackHref="#contact" className="btn btn--primary btn--sm nav__cta">
+          <ContactLink intent="general" fallbackHref="#contact" className="btn btn--light btn--sm nav__cta">
             Let’s talk
           </ContactLink>
           <button

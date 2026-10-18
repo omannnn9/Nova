@@ -16,10 +16,10 @@ npm run lint                 # oxlint
 
 ### Configuration (`.env.local`)
 
-| Variable               | Purpose                                                                                                                                                                                  |
-| ---------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `VITE_WHATSAPP_NUMBER` | Verified business WhatsApp number, international format (e.g. `230XXXXXXXX`). Without it, the CTAs fall back to the contact section and the final CTA is disabled. The build warns.       |
-| `SITE_URL`             | Production origin (e.g. `https://example.com`). When set, the build adds a canonical link, absolute social-image URLs, `sitemap.xml` and a `Sitemap:` line in `robots.txt`. |
+| Variable               | Purpose                                                                                                                                                                             |
+| ---------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `VITE_WHATSAPP_NUMBER` | Verified business WhatsApp number, international format (e.g. `230XXXXXXXX`). Without it, the CTAs fall back to the contact section and the final CTA is disabled. The build warns. |
+| `SITE_URL`             | Production origin (e.g. `https://example.com`). When set, the build adds a canonical link, absolute social-image URLs, `sitemap.xml` and a `Sitemap:` line in `robots.txt`.         |
 
 Both are read at build time, so rebuild after changing them.
 
@@ -40,25 +40,36 @@ src/
     reactbits/            React Bits components (see below)
 ```
 
+## Design system and UI/UX Pro Max
+
+`design-system/nova/MASTER.md` is the working design system: how the brand pack is applied, the motion tiers, and a
+record of which [UI/UX Pro Max](https://github.com/nextlevelbuilder/ui-ux-pro-max-skill) recommendations were adopted
+or rejected (its generated palette and fonts were rejected in favour of the pack). The skill is installed at project
+level in `.claude/skills/` (`npx ui-ux-pro-max-cli@2.15.0 init --ai claude`); query it with
+`python3 .claude/skills/ui-ux-pro-max/scripts/search.py "<query>" --domain ux`.
+
 ## React Bits
 
 Components from [React Bits](https://reactbits.dev) (TS + CSS variants, MIT + Commons Clause) live in
-`src/components/reactbits/`. They were taken from the official registry and are used as documented, configured with
-Nova colours:
+`src/components/reactbits/`, taken from the official registry and configured with Nova colours:
 
-| Component       | Where                                                                 |
-| --------------- | --------------------------------------------------------------------- |
-| Particles       | Hero atmosphere — sparkle points drifting up out of the horizon glow  |
-| SplitText       | Hero headline (masked word rise), contact headline (blur-in)          |
-| DecryptedText   | Mono labels: section eyebrows, the mark's _Built · Ignition · Next_   |
-| ScrollReveal    | Why Nova statement, scrubbed word-by-word with a Nova Purple pass     |
-| SpotlightCard   | Service panels                                                        |
-| Magnet          | Primary calls to action                                               |
-| AnimatedContent | Section and content entrances                                         |
-| LightRays       | Contact section — light from above                                    |
+| Component       | Where                                                                   |
+| --------------- | ----------------------------------------------------------------------- |
+| Particles       | Hero — faint sparkles drifting up from the light at the mark's base     |
+| SplitText       | Hero headline (masked word rise), contact headline (blur-in)            |
+| DecryptedText   | The mark's _Built · Ignition · Next_ annotations under the hero horizon |
+| SpotlightCard   | The Websites feature panel (the page's one lit panel)                   |
+| Magnet          | Primary calls to action                                                 |
+| AnimatedContent | One entrance per content block                                          |
+| ScrollReveal    | Why Nova statement, scrubbed word by word with a Nova Purple pass       |
+| LightRays       | Contact section — light from above                                      |
 
-Local adaptation: `DecryptedText` rendered a `motion.span` without using any motion feature; it now renders a plain
-`span`, which removes the `motion` dependency (~40 KB gzipped) with identical behaviour.
+Local adaptations, each commented in the file:
+
+- `DecryptedText` rendered a `motion.span` without using any motion feature; it renders a plain `span`, which removes
+  the `motion` dependency (~40 KB gzipped).
+- `SplitText` hid its text until every web font loaded, with no upper bound; it now waits at most 900 ms, so the hero
+  headline shows promptly on slow connections (the Archivo file is also preloaded).
 
 ## Brand rules applied
 
@@ -66,7 +77,8 @@ Local adaptation: `DecryptedText` rendered a `motion.span` without using any mot
   White `#F8FAFC`, Surface 1/2, White 8 % borders, White 64 % secondary text.
 - Archivo (width 112, −3 % tracking) for display, Hanken Grotesk for text, JetBrains Mono for labels — self-hosted.
 - The only gradient (Soft Glow → Electric → Nova Purple, vertical) is used only on the lit diagonal and display numerals.
-- One light source per screen: horizon glow in the hero, light from above in the contact section.
+- One light source per screen: light rising from the hero's horizon at the mark's base; light from above in the
+  contact section.
 - Glow is purple only, never on body text or small UI. Light sections switch the mark to Nova Purple on black stems.
 
 ## Accessibility and motion

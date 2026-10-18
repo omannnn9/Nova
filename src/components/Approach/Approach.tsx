@@ -76,7 +76,6 @@ const Approach = () => {
         <div className="approach__intro">
           <SectionHeader
             id="approach-title"
-            index="02"
             eyebrow="Our approach"
             layout="stacked"
             title={

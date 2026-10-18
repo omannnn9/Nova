@@ -128,10 +128,6 @@ svg {
   opacity: 0.7;
 }
 
-.eyebrow__index {
-  color: var(--text-tertiary);
-}
-
 .accent {
   color: var(--nova-glow);
 }

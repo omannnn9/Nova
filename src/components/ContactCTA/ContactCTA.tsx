@@ -44,9 +44,7 @@ const ContactCTA = () => {
       </div>
 
       <div className="cta__inner container">
-        <p className="cta__eyebrow eyebrow">
-          <span className="eyebrow__index">03</span> Contact
-        </p>
+        <p className="cta__eyebrow eyebrow">Contact</p>
 
         <h2 id="cta-title" className="cta__title display" aria-label="Have something in mind?">
           <span aria-hidden="true">

@@ -58,9 +58,8 @@ const WhyNova = () => (
       </AnimatedContent>
 
       <AnimatedContent distance={40} duration={1} stagger={0.08} className="why__principles" threshold={0.05}>
-        {PRINCIPLES.map((item, index) => (
+        {PRINCIPLES.map(item => (
           <article key={item.title} className="principle">
-            <span className="principle__index">0{index + 1}</span>
             <h3 className="principle__title display">{item.title}</h3>
             <p className="principle__text">{item.text}</p>
           </article>

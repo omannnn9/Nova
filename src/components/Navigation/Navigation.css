@@ -244,3 +244,8 @@
 .nav.is-on-light :focus-visible {
   outline-color: var(--nova-purple);
 }
+
+.nav.is-on-light .btn--light {
+  background: var(--nova-black);
+  color: var(--nova-white);
+}

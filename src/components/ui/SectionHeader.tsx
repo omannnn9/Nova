@@ -1,11 +1,9 @@
 import type { ReactNode } from 'react';
 import AnimatedContent from '../reactbits/AnimatedContent/AnimatedContent';
-import DecryptedText from '../reactbits/DecryptedText/DecryptedText';
 import './SectionHeader.css';
 
 interface SectionHeaderProps {
   id: string;
-  index: string;
   eyebrow: string;
   title: ReactNode;
   lede?: ReactNode;
@@ -14,20 +12,17 @@ interface SectionHeaderProps {
   className?: string;
 }
 
-/** Asymmetric section opener: numbered mono eyebrow, oversized title, supporting copy offset to the right. */
-const SectionHeader = ({ id, index, eyebrow, title, lede, layout = 'split', className = '' }: SectionHeaderProps) => (
-  <header className={`section-header section-header--${layout} ${className}`}>
-    <p className="section-header__eyebrow eyebrow">
-      <span className="eyebrow__index">{index}</span>
-      <DecryptedText text={eyebrow} animateOn="view" sequential speed={40} characters="NOVA01/\\_" />
-    </p>
-    <AnimatedContent distance={40} duration={1.1} className="section-header__body">
+/** Section opener: a plain label, an oversized title and supporting copy. Reveals as one block. */
+const SectionHeader = ({ id, eyebrow, title, lede, layout = 'split', className = '' }: SectionHeaderProps) => (
+  <AnimatedContent distance={24} duration={1} className={`section-header section-header--${layout} ${className}`}>
+    <p className="section-header__eyebrow eyebrow">{eyebrow}</p>
+    <div className="section-header__body">
       <h2 id={id} className="section-header__title display">
         {title}
       </h2>
       {lede && <p className="section-header__lede">{lede}</p>}
-    </AnimatedContent>
-  </header>
+    </div>
+  </AnimatedContent>
 );
 
 export default SectionHeader;

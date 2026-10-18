@@ -66,7 +66,7 @@
 .principle {
   position: relative;
   display: grid;
-  grid-template-columns: 4rem minmax(0, 1.1fr) minmax(0, 1fr);
+  grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
   align-items: baseline;
   gap: var(--space-5);
   padding: var(--space-6) 0;
@@ -90,16 +90,24 @@
   transform: scaleX(1);
 }
 
-.principle__index {
-  font-family: var(--font-mono);
-  font-size: var(--text-sm);
-  color: var(--nova-purple);
-}
-
 .principle__title {
+  position: relative;
+  padding-left: 1.4rem;
   font-size: var(--text-lg);
   line-height: 1.15;
   transition: transform var(--dur-base) var(--ease-out);
+}
+
+/* The brand's lit 12.4° stroke marks each principle. */
+.principle__title::before {
+  content: '';
+  position: absolute;
+  left: 0.15rem;
+  top: 0.2em;
+  width: 4px;
+  height: 0.8em;
+  background: var(--nova-purple);
+  transform: skewX(12.4deg);
 }
 
 .principle:hover .principle__title {
@@ -129,12 +137,12 @@
 
 @media (max-width: 767.98px) {
   .principle {
-    grid-template-columns: 2.5rem minmax(0, 1fr);
-    gap: var(--space-2) var(--space-4);
+    grid-template-columns: minmax(0, 1fr);
+    gap: var(--space-3);
   }
 
   .principle__text {
-    grid-column: 2;
+    padding-left: 1.4rem;
   }
 
   .why__intro {

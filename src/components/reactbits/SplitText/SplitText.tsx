@@ -44,6 +44,7 @@ const DEFAULT_TO = { opacity: 1, y: 0 };
 const STIFFNESS = 180;
 const DAMPING = 19;
 const KICK = 0.024;
+const FONT_WAIT_MS = 900;
 
 const useIsoLayoutEffect = typeof window !== 'undefined' ? useLayoutEffect : useEffect;
 
@@ -121,14 +122,24 @@ const SplitText = ({
     liveRef.current = { trigger, hoverEffect, accentColor };
   });
 
+  // Nova adaptation: upstream keeps the text hidden until every web font has loaded, with no
+  // upper bound. On a slow connection that hid the hero headline. After FONT_WAIT_MS the text is
+  // split and shown in whatever font is available; word-level splits survive the later swap.
+  const fontWaitOverRef = useRef(false);
+
   useEffect(() => {
     if (fontsLoaded) return undefined;
     let active = true;
     document.fonts.ready.then(() => {
       if (active) setFontsLoaded(true);
     });
+    const timer = window.setTimeout(() => {
+      fontWaitOverRef.current = true;
+      if (active) setFontsLoaded(true);
+    }, FONT_WAIT_MS);
     return () => {
       active = false;
+      window.clearTimeout(timer);
     };
   }, [fontsLoaded]);
 
@@ -137,7 +148,7 @@ const SplitText = ({
       const el = ref.current;
       if (!el || !text || !fontsLoaded) return;
       el.getBoundingClientRect();
-      if (!fontsAreLoaded()) {
+      if (!fontsAreLoaded() && !fontWaitOverRef.current) {
         setFontsLoaded(false);
         return;
       }

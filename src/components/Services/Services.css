@@ -1,128 +1,149 @@
-.services__grid {
+/* ---------- Feature: Websites ---------- */
+
+.feature.spotlight-card {
   display: grid;
-  grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
-  grid-template-rows: auto auto;
-  gap: var(--space-5);
-}
-
-.services__cell {
-  display: flex;
-}
-
-.services__cell--featured {
-  grid-row: span 2;
-}
-
-/* ---------- Card ---------- */
-
-.service.spotlight-card {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  gap: var(--space-7);
-  width: 100%;
-  padding: clamp(1.5rem, 1rem + 2vw, 2.75rem);
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.05fr);
+  align-items: center;
+  gap: clamp(2.5rem, 1rem + 5vw, 6rem);
+  padding: clamp(1.75rem, 1rem + 3vw, 4rem);
   border-radius: var(--radius-lg);
 }
 
-.service__content {
-  position: relative;
-  z-index: 1;
-}
-
-/* Edge light: a 1px Soft Glow top edge with a faint bleed, as if lit from above (featured cards only). */
-.service__edge {
+/* Edge light: a 1px Soft Glow top edge with a faint bleed, lit from above. Only this panel has it. */
+.feature__edge {
   position: absolute;
   inset: 0 0 auto;
-  height: 40%;
+  height: 45%;
   pointer-events: none;
-  background: radial-gradient(60% 100% at 50% 0%, rgb(192 132 252 / 0.1), transparent 70%);
+  background: radial-gradient(55% 100% at 30% 0%, rgb(192 132 252 / 0.1), transparent 70%);
 }
 
-.service__edge::before {
+.feature__edge::before {
   content: '';
   position: absolute;
-  inset: 0 8% auto;
+  inset: 0 6% auto;
   height: 1px;
   background: var(--light-edge);
   opacity: 0.85;
 }
 
-.service__meta {
-  display: flex;
-  align-items: center;
-  gap: var(--space-3);
-  margin-bottom: var(--space-6);
+.feature__copy {
+  position: relative;
+  z-index: 1;
 }
 
-.service__index {
+.feature__tag {
   font-family: var(--font-mono);
-  font-size: var(--text-sm);
-  color: var(--nova-glow);
-}
-
-.service__tag {
-  padding: 0.3rem 0.7rem;
-  border-radius: var(--radius-pill);
-  border: 1px solid rgb(168 85 247 / 0.35);
-  background: rgb(124 58 237 / 0.12);
   font-size: var(--text-xs);
-  font-weight: 600;
-  letter-spacing: 0.02em;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
   color: var(--nova-glow);
 }
 
-.service__title {
-  font-size: var(--text-xl);
+.feature__title {
+  margin-top: var(--space-4);
+  font-size: var(--text-2xl);
   line-height: 1;
 }
 
-.service--featured .service__title {
-  font-size: var(--text-2xl);
-}
-
-.service__text {
-  margin-top: var(--space-4);
+.feature__text {
+  margin-top: var(--space-5);
   max-width: 30rem;
   font-size: var(--text-md);
   line-height: 1.6;
-  color: var(--text-secondary);
+  color: rgb(248 250 252 / 0.78);
   text-wrap: pretty;
 }
 
-.service--featured .service__text {
-  color: rgb(248 250 252 / 0.78);
-}
-
-.service__list {
+.feature__list {
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: var(--space-3) var(--space-6);
+  gap: var(--space-3);
   margin-top: var(--space-6);
-  font-size: var(--text-sm);
+  padding-top: var(--space-6);
+  border-top: 1px solid var(--border);
+  font-size: var(--text-base);
   color: var(--text-secondary);
 }
 
 /* Each item is marked with a tiny lit diagonal: the brand's 12.4° stroke. */
-.service__list li {
+.feature__list li {
   position: relative;
-  padding-left: 1.1rem;
+  padding-left: 1.25rem;
   line-height: 1.45;
 }
 
-.service__list li::before {
+.feature__list li::before {
   content: '';
   position: absolute;
-  left: 0.15rem;
-  top: 0.22em;
+  left: 0.2rem;
+  top: 0.25em;
   width: 3px;
   height: 0.85em;
   background: var(--nova-electric);
   transform: skewX(12.4deg);
 }
 
-.service__cta {
-  margin-top: var(--space-6);
+.feature__cta {
+  margin-top: var(--space-7);
+}
+
+/* ---------- More services: an open editorial row ---------- */
+
+.services__more {
+  margin-top: clamp(4rem, 3rem + 4vw, 7rem);
+}
+
+.services__more-label {
+  padding-bottom: var(--space-5);
+  font-size: var(--text-md);
+  color: var(--text-secondary);
+}
+
+.services__more-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  border-top: 1px solid var(--border-strong);
+}
+
+.service {
+  display: grid;
+  grid-template-rows: auto auto 1fr;
+  align-content: start;
+  gap: var(--space-4);
+  padding: var(--space-7) var(--space-7) var(--space-6) 0;
+}
+
+.service + .service {
+  padding-left: var(--space-7);
+  padding-right: 0;
+  border-left: 1px solid var(--border);
+}
+
+/* A shared stage so both titles align, whatever each illustration's height. */
+.service__visual {
+  display: flex;
+  align-items: flex-end;
+  height: 8rem;
+  margin-bottom: var(--space-4);
+}
+
+.service__visual .visual {
+  width: 100%;
+  max-width: 22rem;
+}
+
+.service__title {
+  font-size: var(--text-xl);
+  line-height: 1.05;
+}
+
+.service__text {
+  max-width: 28rem;
+  font-size: var(--text-md);
+  line-height: 1.6;
+  color: var(--text-secondary);
+  text-wrap: pretty;
 }
 
 /* ---------- Visuals: shared ---------- */
@@ -132,11 +153,13 @@
   z-index: 1;
 }
 
-.visual * {
+/* Held at their first frame until the section is in view. Needs to outrank the components'
+   own animation shorthands, which reset play-state to running. */
+.services__body .visual * {
   animation-play-state: paused;
 }
 
-.services__grid.is-in .visual * {
+.services__body.is-in .visual * {
   animation-play-state: running;
 }
 
@@ -420,38 +443,49 @@
 
 /* ---------- Responsive ---------- */
 
-@media (max-width: 1023.98px) {
-  .services__grid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-
-  .services__cell--featured {
-    grid-column: 1 / -1;
-    grid-row: auto;
-  }
-
-  .service--featured.spotlight-card {
-    display: grid;
-    grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
-    align-items: center;
+@media (max-width: 899.98px) {
+  .feature.spotlight-card {
+    grid-template-columns: minmax(0, 1fr);
   }
 }
 
 @media (max-width: 767.98px) {
-  .services__grid {
-    grid-template-columns: minmax(0, 1fr);
-    gap: var(--space-4);
-  }
-
-  .service--featured.spotlight-card {
-    display: flex;
-  }
-
-  .service__list {
+  .services__more-grid {
     grid-template-columns: minmax(0, 1fr);
   }
 
-  .service.spotlight-card {
-    gap: var(--space-6);
+  .service,
+  .service + .service {
+    padding: var(--space-6) 0;
+    border-left: 0;
   }
+
+  .service + .service {
+    border-top: 1px solid var(--border);
+  }
+
+  .feature__cta {
+    width: 100%;
+  }
+}
+
+/* Ambient loops run only while the visitor engages with that service; at rest each visual is a
+   composed still (first module lit, flow at rest), so the section has one moving element at most. */
+.services__body.is-in .service .module {
+  animation-play-state: running, paused;
+}
+
+.services__body.is-in .service .flow__pulse {
+  animation-play-state: paused;
+}
+
+.services__body.is-in .service:is(:hover, :focus-within) .module,
+.services__body.is-in .service:is(:hover, :focus-within) .flow__pulse {
+  animation-play-state: running;
+}
+
+.module:first-child {
+  border-color: rgb(168 85 247 / 0.65);
+  box-shadow: inset 0 1px 0 rgb(192 132 252 / 0.6);
+  background: rgb(124 58 237 / 0.16);
 }
