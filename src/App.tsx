@@ -6,9 +6,8 @@ import { useHashLanding } from './hooks/useHashLanding';
 
 // Everything below the hero is split out of the initial bundle and mounted progressively.
 const Services = lazy(() => import('./components/Services/Services'));
-const AutomationDemo = lazy(() => import('./components/AutomationDemo/AutomationDemo'));
-const Approach = lazy(() => import('./components/Approach/Approach'));
 const WhyNova = lazy(() => import('./components/WhyNova/WhyNova'));
+const Approach = lazy(() => import('./components/Approach/Approach'));
 const ContactCTA = lazy(() => import('./components/ContactCTA/ContactCTA'));
 const Footer = lazy(() => import('./components/Footer/Footer'));
 
@@ -27,13 +26,10 @@ const App = () => {
           <Services />
         </Deferred>
         <Deferred>
-          <AutomationDemo />
+          <WhyNova />
         </Deferred>
         <Deferred>
           <Approach />
-        </Deferred>
-        <Deferred>
-          <WhyNova />
         </Deferred>
         <Deferred>
           <ContactCTA />
