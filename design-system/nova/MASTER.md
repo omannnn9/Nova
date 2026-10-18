@@ -51,7 +51,7 @@ Ratio across the page: black ≈ 70%, white ≈ 20%, purple ≈ 10%. One accent 
 ## Layout
 
 - Container 82rem + fluid gutter (16–40px). 4px spacing base; section rhythm `--section-y`.
-- Separation by **hairlines and whitespace first**, panels second. Only one boxed panel on the page (the Websites feature).
+- Separation by **hairlines and whitespace first**, panels second. Only one _lit_ panel on the page (the Websites feature); the automation demo is a hairline-framed workspace with no glow.
 - No arbitrary numbering. Numerals appear only where order is meaningful (the four process stages).
 - Radii: `--radius-pill` for buttons; `--radius-lg` for the single feature panel and the light sheet; nothing else is rounded.
 

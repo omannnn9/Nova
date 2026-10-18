@@ -36,7 +36,7 @@ src/
   components/
     brand/                NovaMark (the Assembly geometry), NovaLogo (lockup)
     ui/                   Buttons, ContactLink, SectionHeader, Deferred (progressive mounting)
-    Navigation/ Hero/ Services/ Approach/ WhyNova/ ContactCTA/ Footer/
+    Navigation/ Hero/ Services/ AutomationDemo/ Approach/ WhyNova/ ContactCTA/ Footer/
     reactbits/            React Bits components (see below)
 ```
 
@@ -53,16 +53,17 @@ level in `.claude/skills/` (`npx ui-ux-pro-max-cli@2.15.0 init --ai claude`); qu
 Components from [React Bits](https://reactbits.dev) (TS + CSS variants, MIT + Commons Clause) live in
 `src/components/reactbits/`, taken from the official registry and configured with Nova colours:
 
-| Component       | Where                                                                   |
-| --------------- | ----------------------------------------------------------------------- |
-| Particles       | Hero — faint sparkles drifting up from the light at the mark's base     |
-| SplitText       | Hero headline (masked word rise), contact headline (blur-in)            |
-| DecryptedText   | The mark's _Built · Ignition · Next_ annotations under the hero horizon |
-| SpotlightCard   | The Websites feature panel (the page's one lit panel)                   |
-| Magnet          | Primary calls to action                                                 |
-| AnimatedContent | One entrance per content block                                          |
-| ScrollReveal    | Why Nova statement, scrubbed word by word with a Nova Purple pass       |
-| LightRays       | Contact section — light from above                                      |
+| Component       | Where                                                                     |
+| --------------- | ------------------------------------------------------------------------- |
+| Particles       | Hero — faint sparkles drifting up from the light at the mark's base       |
+| SplitText       | Hero headline (masked word rise), contact headline (blur-in)              |
+| DecryptedText   | The mark's _Built · Ignition · Next_ annotations under the hero horizon   |
+| SpotlightCard   | The Websites feature panel (the page's one lit panel)                     |
+| Magnet          | Primary calls to action                                                   |
+| AnimatedContent | One entrance per content block                                            |
+| ScrollReveal    | Why Nova statement, scrubbed word by word with a Nova Purple pass         |
+| LightRays       | Contact section — light from above                                        |
+| TextType        | Automation demo — the suggested reply being drafted (typed once, no loop) |
 
 Local adaptations, each commented in the file:
 
@@ -70,6 +71,13 @@ Local adaptations, each commented in the file:
   the `motion` dependency (~40 KB gzipped).
 - `SplitText` hid its text until every web font loaded, with no upper bound; it now waits at most 900 ms, so the hero
   headline shows promptly on slow connections (the Archivo file is also preloaded).
+
+## Automation demo
+
+`src/components/AutomationDemo/` is an illustrative, fully local simulation (enquiry → sorted → reply drafted →
+follow-up task). Sample data and timings live in `demoScript.ts`. It makes no network requests and connects to no
+AI model, inbox, calendar or messaging service; nothing is sent or booked. Under reduced motion it shows the finished
+state at once.
 
 ## Brand rules applied
 

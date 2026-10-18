@@ -142,6 +142,11 @@
   line-height: 1.05;
 }
 
+.service__example {
+  justify-self: start;
+  margin-top: var(--space-2);
+}
+
 .service__text {
   max-width: 28rem;
   font-size: var(--text-md);

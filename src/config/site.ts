@@ -25,12 +25,10 @@ export const whatsappDisplay = /^230\d{8}$/.test(whatsappNumber)
   ? `+230 ${whatsappNumber.slice(3, 7)} ${whatsappNumber.slice(7)}`
   : whatsappNumber && `+${whatsappNumber}`;
 
-// Prefilled WhatsApp messages. The short template gives Nova what it needs for a useful first reply;
-// the visitor can edit or delete it before sending.
+// Prefilled WhatsApp messages; the visitor can edit them before sending.
 export const whatsappMessages = {
-  general: "Hi Nova, I'd like to talk about a project for my business.\n\nBusiness name:\nWhat I need:",
-  website:
-    "Hi Nova, I'm interested in a website for my business.\n\nBusiness name:\nNew website or redesign:\nCurrent website (if any):"
+  general: 'Hi Nova! I’m interested in your services and would like to discuss a project.',
+  website: 'Hi Nova! I’m interested in a website for my business and would like to discuss a project.'
 } as const;
 
 export type WhatsAppIntent = keyof typeof whatsappMessages;

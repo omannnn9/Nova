@@ -16,7 +16,15 @@ const WEBSITE_INCLUDES = [
   'Search-friendly foundations'
 ];
 
-const MORE_SERVICES = [
+interface MoreService {
+  id: string;
+  title: string;
+  text: string;
+  Visual: () => React.JSX.Element;
+  example?: { href: string; label: string };
+}
+
+const MORE_SERVICES: MoreService[] = [
   {
     id: 'web-applications',
     title: 'Web Applications',
@@ -27,7 +35,8 @@ const MORE_SERVICES = [
     id: 'automation',
     title: 'Automation & AI',
     text: 'Practical digital solutions that can simplify repetitive processes and improve workflows.',
-    Visual: FlowVisual
+    Visual: FlowVisual,
+    example: { href: '#demo', label: 'See an example' }
   }
 ];
 
@@ -91,13 +100,19 @@ const Services = () => {
           <div className="services__more">
             <p className="services__more-label">When you need more than a website</p>
             <div className="services__more-grid">
-              {MORE_SERVICES.map(({ id, title, text, Visual }) => (
+              {MORE_SERVICES.map(({ id, title, text, Visual, example }) => (
                 <article key={id} id={id} className="service">
                   <div className="service__visual">
                     <Visual />
                   </div>
                   <h3 className="service__title display">{title}</h3>
                   <p className="service__text">{text}</p>
+                  {example && (
+                    <a href={example.href} className="text-link service__example">
+                      {example.label}
+                      <ArrowIcon />
+                    </a>
+                  )}
                 </article>
               ))}
             </div>
