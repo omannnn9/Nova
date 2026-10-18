@@ -18,11 +18,13 @@ const WEBSITE_INCLUDES = [
 
 const MORE_SERVICES = [
   {
+    id: 'web-applications',
     title: 'Web Applications',
     text: 'Custom web-based tools and applications designed around business requirements.',
     Visual: ModulesVisual
   },
   {
+    id: 'automation',
     title: 'Automation & AI',
     text: 'Practical digital solutions that can simplify repetitive processes and improve workflows.',
     Visual: FlowVisual
@@ -52,6 +54,8 @@ const Services = () => {
         />
 
         <div ref={bodyRef} className={`services__body${inView ? ' is-in' : ''}`}>
+          {/* Anchor outside the reveal wrapper, whose entrance transform would offset in-page jumps. */}
+          <span id="websites" className="services__anchor" aria-hidden="true" />
           <AnimatedContent distance={40} duration={1.1}>
             <SpotlightCard
               className="feature"
@@ -87,8 +91,8 @@ const Services = () => {
           <div className="services__more">
             <p className="services__more-label">When you need more than a website</p>
             <div className="services__more-grid">
-              {MORE_SERVICES.map(({ title, text, Visual }) => (
-                <article key={title} className="service">
+              {MORE_SERVICES.map(({ id, title, text, Visual }) => (
+                <article key={id} id={id} className="service">
                   <div className="service__visual">
                     <Visual />
                   </div>

@@ -1,12 +1,15 @@
+import { lazy } from 'react';
 import Navigation from './components/Navigation/Navigation';
 import Hero from './components/Hero/Hero';
-import Services from './components/Services/Services';
-import Approach from './components/Approach/Approach';
-import WhyNova from './components/WhyNova/WhyNova';
-import ContactCTA from './components/ContactCTA/ContactCTA';
-import Footer from './components/Footer/Footer';
 import Deferred from './components/ui/Deferred';
 import { useHashLanding } from './hooks/useHashLanding';
+
+// Everything below the hero is split out of the initial bundle and mounted progressively.
+const Services = lazy(() => import('./components/Services/Services'));
+const Approach = lazy(() => import('./components/Approach/Approach'));
+const WhyNova = lazy(() => import('./components/WhyNova/WhyNova'));
+const ContactCTA = lazy(() => import('./components/ContactCTA/ContactCTA'));
+const Footer = lazy(() => import('./components/Footer/Footer'));
 
 const App = () => {
   useHashLanding();
@@ -35,7 +38,6 @@ const App = () => {
       <Deferred placeholderHeight="0">
         <Footer />
       </Deferred>
-      <div className="grain" aria-hidden="true" />
     </>
   );
 };

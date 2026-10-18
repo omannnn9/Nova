@@ -14,14 +14,14 @@ npm run preview              # serve the production build
 npm run lint                 # oxlint
 ```
 
-### Configuration (`.env.local`)
+### Configuration
 
-| Variable               | Purpose                                                                                                                                                                             |
-| ---------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `VITE_WHATSAPP_NUMBER` | Verified business WhatsApp number, international format (e.g. `230XXXXXXXX`). Without it, the CTAs fall back to the contact section and the final CTA is disabled. The build warns. |
-| `SITE_URL`             | Production origin (e.g. `https://example.com`). When set, the build adds a canonical link, absolute social-image URLs, `sitemap.xml` and a `Sitemap:` line in `robots.txt`.         |
+| Variable               | Where                  | Purpose                                                                                                                                                                                                   |
+| ---------------------- | ---------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `VITE_WHATSAPP_NUMBER` | `.env` (committed)     | Nova's WhatsApp number, international digits only. Currently `23059084943` (+230 5908 4943). Every contact call to action opens a prefilled chat with it.                                                 |
+| `SITE_URL`             | `.env.local` or CI env | Production origin (e.g. `https://example.com`). When set, the build adds a canonical link, absolute social-image URLs, Organization structured data, `sitemap.xml` and a `Sitemap:` line in `robots.txt`. |
 
-Both are read at build time, so rebuild after changing them.
+Both are read at build time, so rebuild after changing them. `.env.local` overrides `.env`.
 
 ## Structure
 

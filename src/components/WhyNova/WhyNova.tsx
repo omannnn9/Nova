@@ -3,26 +3,27 @@ import AnimatedContent from '../reactbits/AnimatedContent/AnimatedContent';
 import NovaMark from '../brand/NovaMark';
 import './WhyNova.css';
 
+// Concrete working commitments rather than adjectives: each one is something a client can check.
 const PRINCIPLES = [
   {
-    title: 'Built around your business',
-    text: 'Solutions shaped around how your business works and what your customers need, not the other way round.'
+    title: 'Plain language, not jargon',
+    text: 'We explain options and trade-offs in everyday terms, so you can make decisions without a technical background.'
   },
   {
-    title: 'Modern, intuitive experiences',
-    text: 'Clean, fast interfaces that feel natural on a phone, a tablet or a desktop.'
+    title: 'Designed for phones first',
+    text: 'Many customers will find you on their phone, so every page is designed for a small screen before a large one.'
   },
   {
-    title: 'Clear communication',
-    text: 'Plain language and regular updates, so you always know where your project stands.'
+    title: 'Built to make contact easy',
+    text: 'Every page points to a clear next step, such as a WhatsApp message, a call or a form, so interested customers know how to reach you.'
   },
   {
-    title: 'Practical technology',
-    text: 'The right tools for the job, chosen for what they do for you, never complexity for its own sake.'
+    title: 'You approve before we build',
+    text: 'You see and agree the structure and design before development starts.'
   },
   {
-    title: 'Thoughtful implementation',
-    text: 'Care for the details that are easy to skip: speed, accessibility and the small interactions that make a site feel considered.'
+    title: 'Fast, accessible and yours',
+    text: 'Pages that load quickly and work with keyboards and screen readers, handed over with what you need to manage them.'
   }
 ];
 
@@ -36,14 +37,16 @@ const WhyNova = () => (
 
       <div id="why-title">
         <ScrollReveal
-          baseOpacity={0.1}
+          mode="enter"
+          duration={0.7}
+          stagger={0.035}
+          baseOpacity={0}
           enableBlur
           blurStrength={6}
           baseRotation={0}
           highlightColor="#7C3AED"
           containerClassName="why__statement"
           textClassName="why__statement-text display"
-          wordAnimationEnd="center center"
         >
           A nova isn’t a new star. It’s one that has been building energy all along, until it becomes impossible to
           miss.
@@ -64,6 +67,16 @@ const WhyNova = () => (
             <p className="principle__text">{item.text}</p>
           </article>
         ))}
+      </AnimatedContent>
+
+      {/* Facts from the Nova brand pack ("The founder behind it"). Confirm before launch. */}
+      <AnimatedContent distance={30} duration={1} className="why__founder">
+        <h3 className="why__founder-title">Who is behind Nova</h3>
+        <p className="why__founder-text">
+          Nova is the technology company of OD Holdings, founded by Oman Sharma Dilloo. Before Nova, he built ODAX,
+          appointment software for local service businesses, and Tablo, QR ordering for Mauritian restaurants, alongside
+          websites for local businesses.
+        </p>
       </AnimatedContent>
 
       <p className="why__signoff">

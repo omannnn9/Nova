@@ -1,9 +1,10 @@
-import { useEffect, useState, type ReactNode } from 'react';
+import { Suspense, useEffect, useState, type ReactNode } from 'react';
 
 /*
  * Progressive mounting. Below-the-fold sections set up GSAP/ScrollTrigger and WebGL when they
  * mount; doing all of that in the first render produced one long main-thread task. Each
  * <Deferred> instead mounts in its own idle period, in document order, after first paint.
+ * Children may be React.lazy components: their chunks load when they are about to mount.
  */
 const queue: Array<() => void> = [];
 let pumping = false;
@@ -55,7 +56,9 @@ const Deferred = ({ children, placeholderHeight = '100vh' }: DeferredProps) => {
     };
   }, [ready]);
 
-  return ready ? children : <div style={{ minHeight: placeholderHeight }} aria-hidden="true" />;
+  // data-deferred lets other code (useHashLanding) know the layout is still settling.
+  const placeholder = <div data-deferred="" style={{ minHeight: placeholderHeight }} aria-hidden="true" />;
+  return ready ? <Suspense fallback={placeholder}>{children}</Suspense> : placeholder;
 };
 
 export default Deferred;

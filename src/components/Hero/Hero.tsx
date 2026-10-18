@@ -8,6 +8,8 @@ import Deferred from '../ui/Deferred';
 import HeroMark from './HeroMark';
 import { useMediaQuery } from '../../hooks/useMediaQuery';
 import { prefersLiteEffects } from '../../lib/device';
+import { hasWhatsApp } from '../../lib/whatsapp';
+import { whatsappDisplay } from '../../config/site';
 import './Hero.css';
 
 // WebGL atmosphere is non-essential: loaded as a separate chunk and mounted once the main thread is idle.
@@ -15,7 +17,11 @@ const Particles = lazy(() => import('../reactbits/Particles/Particles'));
 
 const PARTICLE_COLORS = ['#C084FC', '#A855F7', '#F8FAFC'];
 const HEADLINE = ['Your business.', 'Built for', 'what’s next.'];
-const SERVICES = ['Websites', 'Web applications', 'Automation & AI'];
+const SERVICES = [
+  { label: 'Websites', href: '#websites' },
+  { label: 'Web applications', href: '#web-applications' },
+  { label: 'Automation & AI', href: '#automation' }
+];
 const LITE = prefersLiteEffects();
 
 /**
@@ -24,21 +30,24 @@ const LITE = prefersLiteEffects();
  * quiet ground strip names the three services and annotates the mark.
  */
 const Hero = () => {
-  const compact = useMediaQuery('(max-width: 767.98px)');
+  // WebGL particles only on desktop-class devices: on phones they cost GPU, battery and scroll
+  // smoothness for a barely visible effect. The horizon, mark and light are pure CSS/SVG.
+  const desktop = useMediaQuery('(min-width: 768px) and (pointer: fine)');
 
   return (
     <section id="top" className="hero" aria-labelledby="hero-title">
       <div className="hero__atmosphere" aria-hidden="true">
-        {!LITE && (
+        <div className="grain" />
+        {!LITE && desktop && (
           <div className="hero__particles">
             <Deferred placeholderHeight="0">
               <Suspense fallback={null}>
                 <Particles
-                  particleCount={compact ? 50 : 110}
+                  particleCount={110}
                   particleSpread={11}
                   speed={0.04}
                   particleColors={PARTICLE_COLORS}
-                  particleBaseSize={compact ? 80 : 95}
+                  particleBaseSize={95}
                   sizeRandomness={1.2}
                   alphaParticles
                   shape="sparkle"
@@ -51,7 +60,6 @@ const Hero = () => {
                   particleHoverFactor={0.5}
                   clickBurst={false}
                   disableRotation
-                  pixelRatio={compact ? 1.5 : undefined}
                 />
               </Suspense>
             </Deferred>
@@ -81,9 +89,18 @@ const Hero = () => {
             ))}
           </h1>
 
-          <AnimatedContent trigger="mount" distance={12} duration={0.8} delay={0.55} className="hero__support">
+          {/* Visible on the first frame (it is the LCP element): it only settles into place, never fades in. */}
+          <AnimatedContent
+            trigger="mount"
+            distance={10}
+            duration={0.8}
+            delay={0.3}
+            animateOpacity={false}
+            className="hero__support"
+          >
             <p className="hero__lede">
-              We design and build professional websites and digital solutions that help businesses move forward.
+              We design and build professional websites and digital solutions that help businesses in Mauritius move
+              forward.
             </p>
             <div className="hero__actions">
               <Magnet padding={60} magnetStrength={4} maxOffset={10}>
@@ -97,6 +114,11 @@ const Hero = () => {
                 <ArrowIcon />
               </a>
             </div>
+            {hasWhatsApp && (
+              <p className="hero__contact-note">
+                Opens a WhatsApp chat with Nova · <span className="hero__contact-number">{whatsappDisplay}</span>
+              </p>
+            )}
           </AnimatedContent>
         </div>
 
@@ -107,8 +129,8 @@ const Hero = () => {
         <span className="hero__horizon" aria-hidden="true" />
         <nav className="hero__index" aria-label="Services">
           {SERVICES.map(service => (
-            <a key={service} href="#services">
-              {service}
+            <a key={service.href} href={service.href}>
+              {service.label}
             </a>
           ))}
         </nav>

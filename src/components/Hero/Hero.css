@@ -93,6 +93,18 @@
   margin-top: var(--space-6);
 }
 
+.hero__contact-note {
+  margin-top: var(--space-4);
+  font-size: var(--text-sm);
+  color: var(--text-tertiary);
+}
+
+.hero__contact-number {
+  color: var(--text-secondary);
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
 .hero__secondary {
   min-height: 44px;
 }
@@ -142,20 +154,6 @@
   width: 100%;
   height: auto;
   overflow: visible;
-}
-
-.hero-mark.is-lit .hero-mark__glow {
-  animation: hero-glow-breathe 6s ease-in-out infinite;
-}
-
-@keyframes hero-glow-breathe {
-  0%,
-  100% {
-    opacity: 0.75;
-  }
-  50% {
-    opacity: 0.55;
-  }
 }
 
 /* Annotations below the horizon, centred under each part (viewBox x: -24 → 124). */

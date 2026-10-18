@@ -1,4 +1,4 @@
-import { navLinks, site } from '../../config/site';
+import { navLinks, site, whatsappDisplay } from '../../config/site';
 import { hasWhatsApp } from '../../lib/whatsapp';
 import NovaLogo from '../brand/NovaLogo';
 import ContactLink from '../ui/ContactLink';
@@ -37,8 +37,8 @@ const Footer = () => {
           <ul>
             <li>
               {hasWhatsApp ? (
-                <ContactLink intent="conversation" className="footer__link">
-                  WhatsApp
+                <ContactLink intent="general" className="footer__link">
+                  WhatsApp <span className="footer__number">{whatsappDisplay}</span>
                 </ContactLink>
               ) : (
                 <a href="#contact" className="footer__link">
@@ -56,7 +56,7 @@ const Footer = () => {
           © {YEAR} {site.name}. An {site.parent} company.
         </p>
         <a href="#top" className="footer__link">
-          Back to top ↑
+          Back to top <span aria-hidden="true">↑</span>
         </a>
       </div>
 

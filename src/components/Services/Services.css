@@ -1,3 +1,7 @@
+.services__anchor {
+  display: block;
+}
+
 /* ---------- Feature: Websites ---------- */
 
 .feature.spotlight-card {

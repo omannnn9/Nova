@@ -51,6 +51,11 @@
   color: var(--nova-white);
 }
 
+.footer__number {
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
 .footer__muted {
   color: var(--text-tertiary);
 }

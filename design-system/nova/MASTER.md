@@ -69,12 +69,12 @@ Ratio across the page: black ≈ 70%, white ≈ 20%, purple ≈ 10%. One accent 
 
 ## Motion
 
-| Tier      | Where                                                                                              | Rule                                          |
-| --------- | -------------------------------------------------------------------------------------------------- | --------------------------------------------- |
-| Signature | Hero: the mark rises out of the horizon and its diagonal ignites; headline word rise               | Once, on load                                 |
-| Chapter   | One reveal per section header block; the process rail fills with scroll; Why Nova statement scrubs | One key element per view                      |
-| Feedback  | Buttons, links, nav, magnet on primary CTAs                                                        | 180–320ms, `--ease-out`                       |
-| Ambient   | Hero particles drifting up; rays in the contact section                                            | Pauses offscreen; static under reduced motion |
+| Tier                                          | Where                                                                                              | Rule                                          |
+| --------------------------------------------- | -------------------------------------------------------------------------------------------------- | --------------------------------------------- |
+| Signature                                     | Hero: the mark rises out of the horizon and its diagonal ignites; headline word rise               | Once, on load                                 |
+| Chapter                                       | One reveal per section header block; the process rail fills with scroll; Why Nova statement scrubs | One key element per view                      |
+| Feedback                                      | Buttons, links, nav, magnet on primary CTAs                                                        | 180–320ms, `--ease-out`                       |
+| Ambient (WebGL on desktop-class devices only) | Hero particles drifting up; rays in the contact section                                            | Pauses offscreen; static under reduced motion |
 
 Enter with deceleration (`--ease-out`); exits are ~60% of enter duration. Under `prefers-reduced-motion`, every element renders in its final state.
 
@@ -83,3 +83,15 @@ Enter with deceleration (`--ease-out`); exits are ~60% of enter duration. Under 
 AA contrast for all text; visible 2px focus outline; skip link; one `h1`; sequential headings; decorative SVG
 `aria-hidden`; split-text headings carry the full text as their accessible name; targets ≥ 44px for primary controls
 and ≥ 24px elsewhere; sticky nav offset with `scroll-padding-top`.
+
+## Performance rules (from the launch audit)
+
+Measured, not assumed — see the audit notes in the commit history.
+
+- No continuous animation on CSS/SVG filters: the hero glow is static (its "breathing" loop cost ~870 ms of main-thread
+  work per 3 s while idle).
+- No fixed, full-screen blend-mode layers: the grain texture lives inside the hero only (the fixed overlay halved
+  mobile scroll frame rate, 60 → 30 fps).
+- WebGL (particles, light rays) only on desktop-class devices; phones keep the CSS light and the SVG mark.
+- The hero's LCP text is never hidden by an entrance animation (it may move, not fade in).
+- Everything below the hero is a lazy chunk mounted progressively (`Deferred`).

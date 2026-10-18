@@ -84,9 +84,55 @@
 }
 
 .cta__note {
+  max-width: 30rem;
   margin-top: var(--space-4);
   font-size: var(--text-sm);
   color: var(--text-tertiary);
+}
+
+.cta__number {
+  color: var(--text-secondary);
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+.cta__hints {
+  margin-top: var(--space-7);
+  padding-top: var(--space-5);
+  border-top: 1px solid var(--border);
+}
+
+.cta__hints-title {
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-tertiary);
+}
+
+.cta__hints ul {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: var(--space-2) var(--space-5);
+  margin-top: var(--space-3);
+  font-size: var(--text-sm);
+  color: var(--text-secondary);
+}
+
+.cta__hints li {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+/* The brand's 12.4° stroke as the list marker. */
+.cta__hints li::before {
+  content: '';
+  width: 2px;
+  height: 0.8em;
+  background: var(--nova-electric);
+  transform: skewX(12.4deg);
 }
 
 .cta__dev-note {
@@ -100,6 +146,13 @@
 }
 
 @media (max-width: 767.98px) {
+  .cta__hints ul {
+    display: grid;
+    grid-template-columns: max-content;
+    justify-content: center;
+    text-align: left;
+  }
+
   .cta__magnet,
   .cta__magnet .cta__button {
     width: 100%;

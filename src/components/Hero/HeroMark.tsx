@@ -59,7 +59,7 @@ const HeroMark = () => {
   );
 
   return (
-    <div ref={root} className={`hero-mark${lit ? ' is-lit' : ''}`} aria-hidden="true">
+    <div ref={root} className="hero-mark" aria-hidden="true">
       <div className="hero-mark__frame">
         <div className="hero-mark__body" data-tilt>
           {/* viewBox leaves room above and beside the mark for its glow; the bottom edge is the horizon. */}

@@ -6,16 +6,30 @@ import { defineConfig, loadEnv, type Plugin } from 'vite';
  * The domain is not known yet, so nothing is invented: when SITE_URL is unset the build only
  * emits a permissive robots.txt, and warns. Once SITE_URL is set it adds a canonical link,
  * absolute og:image/twitter:image URLs, sitemap.xml and a Sitemap line in robots.txt.
- * It also warns when the WhatsApp number (the primary conversion path) is missing.
+ * With SITE_URL it also adds Organization structured data (only facts the site itself states).
+ * It warns when the WhatsApp number (the primary conversion path) is missing.
  */
-function seo(siteUrl: string, whatsapp: string): Plugin {
+function seo(siteUrl: string, whatsappRaw: string): Plugin {
   const origin = siteUrl.replace(/\/+$/, '');
+  const whatsapp = whatsappRaw.replace(/\D/g, '');
   return {
     name: 'nova-seo',
     apply: 'build',
     transformIndexHtml(html) {
       if (!origin) return html;
+      const organization = {
+        '@context': 'https://schema.org',
+        '@type': 'Organization',
+        name: 'Nova',
+        url: `${origin}/`,
+        logo: `${origin}/icon-512.png`,
+        parentOrganization: { '@type': 'Organization', name: 'OD Holdings' },
+        ...(whatsapp && {
+          contactPoint: { '@type': 'ContactPoint', telephone: `+${whatsapp}`, contactType: 'customer service' }
+        })
+      };
       return html
+        .replace('</head>', `  <script type="application/ld+json">${JSON.stringify(organization)}</script>\n  </head>`)
         .replace(/content="\/og-image\.png"/g, `content="${origin}/og-image.png"`)
         .replace(
           '</title>',

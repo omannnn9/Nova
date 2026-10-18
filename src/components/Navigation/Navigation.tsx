@@ -162,7 +162,9 @@ const Navigation = () => {
             {navLinks.map((link, index) => (
               <li key={link.href} style={{ '--i': index } as React.CSSProperties}>
                 <a href={link.href} onClick={close}>
-                  <span className="nav__panel-index">0{index + 1}</span>
+                  <span className="nav__panel-index" aria-hidden="true">
+                    0{index + 1}
+                  </span>
                   {link.label}
                 </a>
               </li>
