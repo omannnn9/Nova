@@ -14,8 +14,7 @@ const Footer = () => {
           <NovaLogo />
           <p className="footer__tagline">{site.tagline}</p>
           <p className="footer__about">
-            Websites, web applications and automation for businesses, from {site.location}. Nova is the technology
-            company of {site.parent}.
+            Websites, web applications and automation for businesses, from {site.location}.
           </p>
         </div>
 
@@ -53,7 +52,7 @@ const Footer = () => {
 
       <div className="footer__base container">
         <p>
-          © {YEAR} {site.name}. An {site.parent} company.
+          © {YEAR} {site.name}. All rights reserved.
         </p>
         <a href="#top" className="footer__link">
           Back to top <span aria-hidden="true">↑</span>

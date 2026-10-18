@@ -23,7 +23,6 @@ function seo(siteUrl: string, whatsappRaw: string): Plugin {
         name: 'Nova',
         url: `${origin}/`,
         logo: `${origin}/icon-512.png`,
-        parentOrganization: { '@type': 'Organization', name: 'OD Holdings' },
         ...(whatsapp && {
           contactPoint: { '@type': 'ContactPoint', telephone: `+${whatsapp}`, contactType: 'customer service' }
         })

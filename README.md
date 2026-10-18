@@ -1,6 +1,6 @@
 # Nova — website
 
-Landing page for **Nova**, the technology company of OD Holdings (Mauritius). Built with React, TypeScript and Vite,
+Landing page for **Nova**, a technology business based in Mauritius. Built with React, TypeScript and Vite,
 following the _Nova 2.0 Brand Identity System_.
 
 ## Getting started

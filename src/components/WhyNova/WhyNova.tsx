@@ -69,16 +69,6 @@ const WhyNova = () => (
         ))}
       </AnimatedContent>
 
-      {/* Facts from the Nova brand pack ("The founder behind it"). Confirm before launch. */}
-      <AnimatedContent distance={30} duration={1} className="why__founder">
-        <h3 className="why__founder-title">Who is behind Nova</h3>
-        <p className="why__founder-text">
-          Nova is the technology company of OD Holdings, founded by Oman Sharma Dilloo. Before Nova, he built ODAX,
-          appointment software for local service businesses, and Tablo, QR ordering for Mauritian restaurants, alongside
-          websites for local businesses.
-        </p>
-      </AnimatedContent>
-
       <p className="why__signoff">
         <span>From Mauritius,</span> <span className="why__signoff-accent">for everywhere.</span>
       </p>

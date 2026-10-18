@@ -8,7 +8,6 @@
 export const site = {
   name: 'Nova',
   tagline: 'Building the future.',
-  parent: 'OD Holdings',
   location: 'Mauritius'
 } as const;
 
