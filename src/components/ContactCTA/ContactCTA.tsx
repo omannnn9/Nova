@@ -4,6 +4,8 @@ import AnimatedContent from '../reactbits/AnimatedContent/AnimatedContent';
 import Magnet from '../reactbits/Magnet/Magnet';
 import ContactLink from '../ui/ContactLink';
 import ArrowIcon from '../ui/ArrowIcon';
+import WhatsAppIcon from '../ui/WhatsAppIcon';
+import CopyNumber from './CopyNumber';
 import { hasWhatsApp } from '../../lib/whatsapp';
 import { whatsappDisplay } from '../../config/site';
 import { useInViewOnce } from '../../hooks/useInViewOnce';
@@ -87,10 +89,17 @@ const ContactCTA = () => {
           </Magnet>
           {hasWhatsApp ? (
             <>
-              <p className="cta__note">
-                Opens a WhatsApp chat with Nova at <span className="cta__number">{whatsappDisplay}</span>, with a short
-                message you can edit before sending.
-              </p>
+              <p className="cta__note">Opens WhatsApp with a short message you can edit before sending.</p>
+              <div className="cta__channel">
+                <span className="cta__channel-name">
+                  <WhatsAppIcon className="wa-icon cta__channel-icon" />
+                  <span className="cta__channel-label">WhatsApp</span>
+                </span>
+                <span className="cta__channel-number">
+                  <span className="cta__number">{whatsappDisplay}</span>
+                  <CopyNumber value={whatsappDisplay} />
+                </span>
+              </div>
               <div className="cta__hints">
                 <p className="cta__hints-title">Useful to mention</p>
                 <ul>

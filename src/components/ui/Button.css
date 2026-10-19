@@ -35,6 +35,17 @@
   transform: translateX(3px);
 }
 
+/* The WhatsApp glyph that leads every contact action. Static: it never nudges or glows. */
+.wa-icon {
+  width: 1.2em;
+  height: 1.2em;
+  flex: none;
+}
+
+.btn .wa-icon {
+  margin-right: -0.125rem;
+}
+
 /* Primary: the one lit action. White on Nova Purple = 5.5:1. */
 .btn--primary {
   background: var(--nova-purple);
