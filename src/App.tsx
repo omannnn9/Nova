@@ -5,6 +5,7 @@ import Deferred from './components/ui/Deferred';
 import { useHashLanding } from './hooks/useHashLanding';
 
 // Everything below the hero is split out of the initial bundle and mounted progressively.
+const Work = lazy(() => import('./components/Work/Work'));
 const Services = lazy(() => import('./components/Services/Services'));
 const WhyNova = lazy(() => import('./components/WhyNova/WhyNova'));
 const Approach = lazy(() => import('./components/Approach/Approach'));
@@ -22,6 +23,9 @@ const App = () => {
       <Navigation />
       <main id="main">
         <Hero />
+        <Deferred>
+          <Work />
+        </Deferred>
         <Deferred>
           <Services />
         </Deferred>

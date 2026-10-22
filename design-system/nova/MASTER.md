@@ -66,6 +66,12 @@ Ratio across the page: black ≈ 70%, white ≈ 20%, purple ≈ 10%. One accent 
 - **Primary button**: Nova Purple pill, 52–68px tall, white label, arrow nudge on hover, action glow on hover/focus plus a 2px focus outline. One per view.
 - **WhatsApp actions**: every link that opens WhatsApp leads with the WhatsApp glyph in `currentColor` (white on purple, black on the white nav pill), never WhatsApp green. The glyph is static: the arrow nudges, the glyph does not. The contact section also spells out the number with a Copy button.
 - **Secondary**: text link with an underline that draws in. No outlined ghost pills next to every primary.
+- **Work (project case)**: a status line (Live / In development / Private, a plain dot that never pulses), the project
+  name, a summary and a white-pill "Visit" link (purple stays reserved for contacting Nova). Then real screenshots, flat
+  with a hairline border and square corners, no browser chrome or device frames: the desktop and phone captures of one
+  view side by side, at one shared height; phones show the phone capture only. Tabs switch views with a short crossfade
+  (instant under reduced motion), and a caption says what the view shows. Brief, contribution and stack sit below
+  under a hairline, with credits for work that is not Nova's.
 - **Navigation**: transparent over the hero; dark blurred bar once scrolled; switches to the light lockup over the light section; active section dot. Mobile: full-screen sheet, focus-trapped, Escape closes.
 
 ## Motion

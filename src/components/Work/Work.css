@@ -1,0 +1,288 @@
+.work__list {
+  display: grid;
+  gap: clamp(5rem, 3rem + 6vw, 9rem);
+}
+
+/* ---------- Header: status line, name, summary, address ---------- */
+
+.case__head {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: end;
+  gap: var(--space-5) var(--space-8);
+}
+
+.case__meta {
+  grid-column: 1 / -1;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-2) var(--space-5);
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-tertiary);
+}
+
+.case__status {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  color: var(--nova-white);
+}
+
+/* A plain state marker, not a light: it never pulses or glows. */
+.case__status::before {
+  content: '';
+  width: 0.5rem;
+  height: 0.5rem;
+  border-radius: 50%;
+  background: var(--nova-glow);
+}
+
+.case__status--in-development::before,
+.case__status--private::before {
+  background: transparent;
+  border: 1px solid var(--nova-glow);
+}
+
+.case__title {
+  font-size: var(--text-2xl);
+  line-height: 1;
+}
+
+.case__summary {
+  grid-column: 1;
+  max-width: 40rem;
+  font-size: var(--text-md);
+  line-height: 1.6;
+  color: var(--text-secondary);
+  text-wrap: pretty;
+}
+
+.case__visit {
+  grid-column: 2;
+  grid-row: 2 / span 2;
+  align-self: end;
+}
+
+.case__visit:hover .btn__icon,
+.case__visit:focus-visible .btn__icon {
+  transform: translate(2px, -2px);
+}
+
+/* ---------- Screenshots: desktop and phone, the same view side by side ---------- */
+
+/* The phone column is sized so both frames share one height: 0.2888 = (1200 / 1920) x (780 / 1688). */
+.case__stage {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 0.2888fr);
+  align-items: start;
+  gap: var(--space-5);
+  margin-top: var(--space-7);
+}
+
+.case__shot {
+  margin: 0;
+}
+
+.case__frame {
+  position: relative;
+  overflow: hidden;
+  border: 1px solid var(--border-strong);
+  background: var(--surface-1);
+}
+
+.case__frame--desktop {
+  aspect-ratio: 1920 / 1200;
+}
+
+.case__frame--phone {
+  aspect-ratio: 780 / 1688;
+}
+
+.case__frame img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0;
+  transition: opacity 450ms var(--ease-out);
+}
+
+.case__frame img.is-active {
+  opacity: 1;
+}
+
+.case__frame-label {
+  margin-top: var(--space-3);
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  letter-spacing: 0.06em;
+  color: var(--text-tertiary);
+}
+
+/* ---------- View switcher ---------- */
+
+.case__views {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-3) var(--space-6);
+  margin-top: var(--space-5);
+}
+
+.case__tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-1) var(--space-5);
+}
+
+.case__tab {
+  position: relative;
+  min-height: 2.75rem;
+  font-size: var(--text-base);
+  font-weight: 600;
+  color: var(--text-tertiary);
+  transition: color var(--dur-fast) var(--ease-out);
+}
+
+.case__tab::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0.45rem;
+  height: 2px;
+  background: var(--nova-electric);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform var(--dur-base) var(--ease-out);
+}
+
+.case__tab:hover,
+.case__tab[aria-selected='true'] {
+  color: var(--nova-white);
+}
+
+.case__tab[aria-selected='true']::after {
+  transform: scaleX(1);
+}
+
+.case__caption {
+  max-width: 34rem;
+  font-size: var(--text-sm);
+  color: var(--text-secondary);
+}
+
+/* ---------- Facts: brief, contribution, stack ---------- */
+
+.case__facts {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.25fr) minmax(0, 0.85fr);
+  gap: var(--space-6) var(--space-7);
+  margin-top: var(--space-8);
+  padding-top: var(--space-7);
+  border-top: 1px solid var(--border-strong);
+}
+
+.case__fact dt {
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-tertiary);
+}
+
+.case__fact dd {
+  margin: var(--space-4) 0 0;
+  font-size: var(--text-base);
+  line-height: 1.6;
+  color: var(--text-secondary);
+  text-wrap: pretty;
+}
+
+.case__list {
+  display: grid;
+  gap: var(--space-2);
+}
+
+/* The brand's 12.4° stroke as the list marker, as in the Websites panel. */
+.case__list li {
+  position: relative;
+  padding-left: 1.25rem;
+  line-height: 1.5;
+}
+
+.case__list li::before {
+  content: '';
+  position: absolute;
+  left: 0.2rem;
+  top: 0.3em;
+  width: 2px;
+  height: 0.85em;
+  background: var(--nova-electric);
+  transform: skewX(12.4deg);
+}
+
+.case__stack {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2) var(--space-4);
+  font-family: var(--font-mono);
+  font-size: var(--text-sm);
+  color: var(--nova-white);
+}
+
+.case__credits {
+  margin-top: var(--space-5);
+  font-size: var(--text-sm);
+  color: var(--text-tertiary);
+}
+
+/* ---------- Responsive ---------- */
+
+@media (max-width: 899.98px) {
+  .case__head {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .case__visit {
+    grid-column: 1;
+    grid-row: auto;
+    justify-self: start;
+  }
+
+  .case__facts {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+/* Phones show the phone capture alone, cropped from the top: a desktop capture at this width is too
+   small to read. */
+@media (max-width: 639.98px) {
+  .case__stage {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .case__shot--desktop {
+    display: none;
+  }
+
+  .case__frame--phone {
+    aspect-ratio: 4 / 5;
+  }
+
+  .case__frame--phone img {
+    object-position: top;
+  }
+
+  .case__visit {
+    width: 100%;
+  }
+}

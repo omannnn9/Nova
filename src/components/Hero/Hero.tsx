@@ -109,8 +109,8 @@ const Hero = () => {
                   <ArrowIcon />
                 </ContactLink>
               </Magnet>
-              <a href="#services" className="text-link hero__secondary">
-                Explore our services
+              <a href="#work" className="text-link hero__secondary">
+                See our work
                 <ArrowIcon />
               </a>
             </div>
