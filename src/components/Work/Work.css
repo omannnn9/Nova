@@ -32,7 +32,8 @@
   padding: var(--space-5) 0;
 }
 
-/* The client's mark, shown as supplied: their logo is round on white. */
+/* The client's mark in a circle, on the ground it uses in its own brand (white for Flying Dodo,
+   the card's dark teal for KG). */
 .work__logo {
   width: 4.5rem;
   height: 4.5rem;

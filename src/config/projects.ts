@@ -7,6 +7,7 @@
  * here and add an entry. No layout changes are needed.
  */
 import flyingDodoLogo from '../assets/projects/flying-dodo-logo.webp';
+import kgRentalsLogo from '../assets/projects/kg-rentals-logo.webp';
 
 export type ProjectStatus = 'live' | 'in-development' | 'private';
 
@@ -45,5 +46,18 @@ export const projects: Project[] = [
     status: 'live',
     url: 'https://www.flyingdodo.com',
     urlLabel: 'www.flyingdodo.com'
+  },
+  {
+    id: 'kg-rentals',
+    name: 'Ketan Gungah · KG Rentals',
+    logo: kgRentalsLogo,
+    summary:
+      'Digital business card for the director of a property management firm: services, English and French, and one-tap WhatsApp contact.',
+    kind: 'Website',
+    sector: 'Property management, Mauritius',
+    year: '2026',
+    status: 'live',
+    url: 'https://kg-liart.vercel.app',
+    urlLabel: 'kg-liart.vercel.app'
   }
 ];
