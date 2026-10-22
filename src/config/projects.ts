@@ -43,7 +43,7 @@ export const projects: Project[] = [
     sector: 'Craft brewery, Mauritius',
     year: '2026',
     status: 'live',
-    url: 'https://flyingdodo.com',
-    urlLabel: 'flyingdodo.com'
+    url: 'https://www.flyingdodo.com',
+    urlLabel: 'www.flyingdodo.com'
   }
 ];
