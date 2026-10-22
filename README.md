@@ -29,7 +29,7 @@ Both are read at build time, so rebuild after changing them. `.env.local` overri
 src/
   config/site.ts          Site copy, nav links, WhatsApp messages (single source for contact config)
   config/projects.ts      Projects shown in the Work section (see "Adding a project" below)
-  assets/projects/        Real screenshots of each project, as WebP
+  assets/projects/        Project logos, as WebP
   lib/whatsapp.ts         Click-to-chat URL builder (wa.me + encodeURIComponent)
   lib/device.ts           Lite-mode heuristic (Save-Data, very low CPU/memory) for skipping WebGL
   styles/tokens.css       Brand tokens: colours, type, spacing, light, motion — from the brand pack
@@ -44,13 +44,10 @@ src/
 
 ## Adding a project
 
-The Work section renders every entry in `src/config/projects.ts`; the first is the featured case. Each project has a
-status (`live`, `in-development`, `private`), an optional public URL, a summary, the brief, Nova's contribution, the
-stack and a set of screenshot views (desktop and phone captures of the same view, switchable by tab).
-
-Publish only what can be backed up by the project's code, Git history or the client's permission, and use real
-screenshots, not mockups. Capture each view at 1440 × 900 (save 1920 and 1200 px wide) and 390 × 844 (save 780 and
-480 px wide) as WebP in `src/assets/projects/<id>/`. Credit work that is not Nova's (photography, logos, copy).
+The Work section lists every entry in `src/config/projects.ts` as one row: logo, name, a one-line summary, status
+(`live`, `in-development`, `private`), type and year, linking to the project when it has a public URL. Add the logo to
+`src/assets/projects/` (square, at least 144 px, WebP) and an entry to the list. Publish only what can be backed up by
+the project's code, Git history or the client's permission.
 
 ## Design system and UI/UX Pro Max
 
@@ -72,7 +69,7 @@ Components from [React Bits](https://reactbits.dev) (TS + CSS variants, MIT + Co
 | DecryptedText   | The mark's _Built · Ignition · Next_ annotations under the hero horizon |
 | SpotlightCard   | The Websites feature panel (the page's one lit panel)                   |
 | Magnet          | Primary calls to action                                                 |
-| AnimatedContent | One entrance per content block, including each project in Work         |
+| AnimatedContent | One entrance per content block                                          |
 | ScrollReveal    | Why Nova statement, scrubbed word by word with a Nova Purple pass       |
 | LightRays       | Contact section — light from above                                      |
 
